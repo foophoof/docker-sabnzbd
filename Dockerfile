@@ -43,8 +43,6 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
 
 VOLUME ["/datadir", "/media"]
 
-EXPOSE 8080
-
 #
 # Start SABnzbd.
 #
