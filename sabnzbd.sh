@@ -48,7 +48,7 @@ echo "[DONE]"
 #
 
 printf "Get listener port... "
-PORT=$(sed -n '/^port *=/{s/port *= *//p;q}' ${CONFIG})
+[[ -z "${PORT}" ]] && PORT=$(sed -n '/^port *=/{s/port *= *//p;q}' ${CONFIG})
 LISTENER="-s 0.0.0.0:${PORT:=8080}"
 echo "[${PORT}]"
 
