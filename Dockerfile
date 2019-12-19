@@ -1,5 +1,5 @@
 FROM debian:buster
-MAINTAINER Dominique Barton
+MAINTAINER foophoof
 
 #
 # Add SABnzbd init script.
