@@ -11,8 +11,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag docker.pkg.github.com/$GITHUB_REPOSITORY/sabnzbd:$(date +%s)
+      run: docker build . --file Dockerfile --tag foophoof/sabnzbd:$(date +%s)
     - name: Log in to Docker Hub
-      run: docker login -u $GITHUB_ACTOR -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
+      run: echo "${DOCKER_API_KEY}" | docker login -u $DOCKER_USERNAME --password-stdin
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_API_KEY: ${{ secrets.DOCKER_API_KEY }}
     - name: Push image to Docker Package Repo
-      run: "docker push docker.pkg.github.com/$GITHUB_REPOSITORY/sabnzbd"
+      run: "docker push foophoof/sabnzbd"
