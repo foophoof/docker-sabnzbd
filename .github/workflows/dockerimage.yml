@@ -11,4 +11,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag sabnzbd:$(date +%s)
+      run: docker build . --file Dockerfile --tag docker.pkg.github.com/$GITHUB_REPOSITORY/sabnzbd:$(date +%s)
+    - name: Log in to Docker Hub
+      run: docker login -u $GITHUB_ACTOR -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
+    - name: Push image to Docker Package Repo
+      run: "docker push docker.pkg.github.com/$GITHUB_REPOSITORY/sabnzbd"
